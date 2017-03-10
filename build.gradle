@@ -1,14 +1,24 @@
 group 'fr.insalyon.tc.dia'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
+buildscript {
+    repositories {
+        maven {
+            url "https://maven.eveoh.nl/content/repositories/releases"
+        }
+    }
 
-sourceCompatibility = 1.8
+    dependencies {
+        classpath "nl.eveoh:gradle-aspectj:1.6"
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+project.ext {
+    aspectjVersion = '1.8.4'
 }
+
+apply plugin: 'aspectj'
