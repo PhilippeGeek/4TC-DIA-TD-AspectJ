@@ -11,4 +11,12 @@ aspect Hello {
             throw new IllegalArgumentException("fib is undefined for negative numbers");
         }
     }
+
+    pointcut rootFibCall(long n):
+            call(long Sample.fib(long)) && args(n);
+
+    before(long n): rootFibCall(n) && !withincode(long Sample.fib(long)) {
+        System.out.println("<<< fib(" + n + ")");
+    }
+
 }
